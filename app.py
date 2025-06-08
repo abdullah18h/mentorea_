@@ -45,7 +45,7 @@ with open('./new_interaction_df_v2.pkl', 'rb') as f:
 
 
 # LightFM recommendation function (for mentees with interactions)
-def recommend_mentors(mentee_id, top_k=6):
+def recommend_mentors(mentee_id, top_k=50):
     try:
         # Attempt to transform the mentee_id directly (assuming UUID is encoded)
         mentee_idx = mentee_encoder.transform(np.array([mentee_id]).reshape(-1, 1))[0]
@@ -86,7 +86,7 @@ def recommend_mentors(mentee_id, top_k=6):
 
 
 # Content-based recommendation function (for cold-start mentees)
-def recommend_mentors_content_based(mentee_id, top_k=6, weights=None):
+def recommend_mentors_content_based(mentee_id, top_k=50, weights=None):
     if weights is None:
         weights = {
             'skills': 0.4,
@@ -134,7 +134,7 @@ def recommend_mentors_content_based(mentee_id, top_k=6, weights=None):
     except Exception as e:
         return str(e)
 
-def recommend_mentors_content_based_skills(m_skills, top_k=6, weights=None):
+def recommend_mentors_content_based_skills(m_skills, top_k=50, weights=None):
     if weights is None:
         weights = {
             'skills': 0.4,
@@ -207,7 +207,7 @@ def get_recommendations():
 
     mentee_id = data.get('mentee_id')  # Already a string (UUID)
     m_skills = data.get('m_skills')  # Expecting a list of strings
-    top_k = 6
+    top_k = 50
 
     # Validate mentee_id
     if mentee_id is None:
