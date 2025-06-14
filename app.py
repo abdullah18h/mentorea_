@@ -3,7 +3,6 @@
 import numpy as np
 from flask import Flask, request, jsonify
 import pickle
-from pyngrok import ngrok
 from sklearn.metrics.pairwise import cosine_similarity
 import os
 
